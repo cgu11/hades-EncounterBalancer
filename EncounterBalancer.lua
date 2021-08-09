@@ -6,8 +6,8 @@ local config = {
     WaveScaling = true, -- forces a # of waves in an encounter to force average for the biome
     WaveAverages = {
         Tartarus = 1.9, -- default is 2, since it's 1-3 range
-        Asphodel = 2.25, -- default is 2.5, since it's 2-3 range
-        Elysium = 2.25, -- default is 2.5, since it's a 2-3 range
+        Asphodel = 2.3, -- default is 2.5, since it's 2-3 range
+        Elysium = 2.3, -- default is 2.5, since it's a 2-3 range
     },
     Debug = true, -- requires PrintUtil
 }
@@ -48,9 +48,9 @@ ModUtil.WrapBaseFunction("GenerateEncounter", function( baseFunc, currentRun, ro
         local relativeBiomeDepth = (runDepth - EncounterBalancer.BiomeData[currentBiome].Intro) / EncounterBalancer.BiomeData[currentBiome].Length
         if relativeBiomeDepth <= 0.25 then
             encounter.MinEliteTypes = 0
-        elseif relativeBiomeDepth <= 0.5 then
+        elseif relativeBiomeDepth <= 0.6 then
             encounter.MinEliteTypes = 1
-        elseif relativeBiomeDepth <= 0.85 then
+        elseif relativeBiomeDepth <= 0.95 then
             encounter.MinEliteTypes = 2
         else
             encounter.MinEliteTypes = 3
