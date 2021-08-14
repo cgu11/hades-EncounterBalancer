@@ -9,7 +9,7 @@ local config = {
         Asphodel = 2.3, -- default is 2.5, since it's 2-3 range
         Elysium = 2.3, -- default is 2.5, since it's a 2-3 range
     },
-    Debug = true, -- requires PrintUtil
+    Debug = false, -- requires PrintUtil
 }
 EncounterBalancer.config = config
 
@@ -46,14 +46,12 @@ ModUtil.WrapBaseFunction("GenerateEncounter", function( baseFunc, currentRun, ro
     
     if validRoom and validEncounter and EncounterBalancer.config.Enabled and EncounterBalancer.config.EliteScaling and EncounterBalancer.BiomeData[currentBiome] then
         local relativeBiomeDepth = (runDepth - EncounterBalancer.BiomeData[currentBiome].Intro) / EncounterBalancer.BiomeData[currentBiome].Length
-        if relativeBiomeDepth <= 0.25 then
+        if relativeBiomeDepth <= 0.33 then
             encounter.MinEliteTypes = 0
-        elseif relativeBiomeDepth <= 0.6 then
+        elseif relativeBiomeDepth <= 0.85 then
             encounter.MinEliteTypes = 1
-        elseif relativeBiomeDepth <= 0.95 then
-            encounter.MinEliteTypes = 2
         else
-            encounter.MinEliteTypes = 3
+            encounter.MinEliteTypes = 2
         end
         encounter.MaxEliteTypes = math.max(encounter.MinEliteTypes, encounter.MaxEliteTypes)
     end
